@@ -1,6 +1,6 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
-import { ErrorComponent } from './error'
+import { ErrorComponent } from '@storybook'
+import { IconContainer, InputContainer, InputEl } from './styles'
 
 type InputType = {
   value: string,
@@ -12,32 +12,6 @@ type InputType = {
   placeholder?: string,
   error?: string
 }
-
-const InputContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-`
-
-const InputEl = styled('input')<{icon: boolean}>`
-  font-size: 14px;
-  width: 100%;
-  color: #222222;
-  background: #F5F8FA;
-  height: 50px;
-  padding: 0 18px;
-  &::placeholder {
-    color: #A2A2A2;
-  }
-  ${props => props.icon && css`
-    padding: 0 18px 0 52px;
-  `};
-`
-
-const IconContainer = styled.div`
-  position: absolute;
-  left: 18px;
-`
 
 export const Input: React.FC<InputType> = (props) => {
   return (

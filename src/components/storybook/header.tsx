@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import { H1 } from './styles'
 
 enum HeaderOptions {
   h1,
@@ -14,16 +14,6 @@ interface HeaderInterface extends HeaderType {
   text: string,
   center?: boolean
 }
-
-const H1 = styled('h1')<{isCenter: boolean}>`
-  font-size: 28px;
-  color: #222222;
-  line-height: 34px;
-
-  ${(props) => props.isCenter && css`
-    text-align: center;
-  `};
-`
 
 export const Header: React.FC<HeaderInterface> = (props) => {
   if (props.h1) {

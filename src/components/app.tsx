@@ -8,10 +8,9 @@ import {
   Checkbox,
   RadioButtons,
   Button,
-} from '@/storybook'
+} from '@storybook'
 import { useMutation, gql } from '@apollo/client';
-import { testLatinLetters } from './helpers'
-import isValidEmail from 'isemail'
+import { testLatinLetters, checkValidEmail } from '@/helpers'
 
 const countries = ['Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya']
 
@@ -81,7 +80,10 @@ export const App: React.FC = () => {
   
   const handleRegister = () => {
     const {email, password, fullName, country} = state
+
     createUser({variables: {email, password, fullName, country}})
+      .then((res) => window.alert(`token: ${res.data.createUser.token}`))
+      .catch((e) => window.alert(e.message))
   }
 
   const checkField = (type: string, value: boolean) => {
@@ -103,9 +105,15 @@ export const App: React.FC = () => {
     const { email, password, fullName, country, gender, isAcceptedPrivacy } = state
     const isInvalid = Object.values(errorState).filter(_ => _).length
     if (loading || isInvalid || !email || !password || !fullName || !country || !gender || !isAcceptedPrivacy) {
-      return true
+      return false
     }
     return false
+  }
+
+  const handleChange = (type: string) => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => (
+      setState({...state, [type]: event.target.value})
+    )
   }
   
   return (
@@ -121,8 +129,8 @@ export const App: React.FC = () => {
             placeholder='Enter your name'
             value={state.fullName}
             blur={(evt: React.ChangeEvent<HTMLInputElement>) => checkField('fullName', testLatinLetters(evt.target.value))}
-            change={(evt: React.ChangeEvent<HTMLInputElement>) => setState({...state, fullName: evt.target.value})}
-            error={(error && error.message) || errorState.fullName && 'Please enter a valid name'}
+            change={handleChange('fullName')}
+            error={errorState.fullName && 'Please enter a valid name'}
             />
         </div>
 
@@ -130,10 +138,10 @@ export const App: React.FC = () => {
           <Input
             placeholder='Email'
             value={state.email}
-            blur={(evt: React.ChangeEvent<HTMLInputElement>) => evt.target.value && checkField('email', !isValidEmail.validate(evt.target.value, { minDomainAtoms: 2 }))}
+            blur={(evt: React.ChangeEvent<HTMLInputElement>) => evt.target.value && checkField('email', !checkValidEmail(evt.target.value))}
             icon={<EmailIcon />}
-            change={(evt: React.ChangeEvent<HTMLInputElement>) => setState({ ...state, email: evt.target.value })}
-            error={errorState.email && 'Please enter a valid email address'}
+            change={handleChange('email')}
+            error={(error && error.message) || errorState.email && 'Please enter a valid email address'}
             />
         </div>
         
@@ -144,7 +152,7 @@ export const App: React.FC = () => {
             blur={(evt: React.ChangeEvent<HTMLInputElement>) => evt.target.value && checkField('password', evt.target.value.length < 6)}
             icon={<LockIcon />}
             type='password'
-            change={(evt: React.ChangeEvent<HTMLInputElement>) => setState({...state, password: evt.target.value})}
+            change={handleChange('password')}
             error={errorState.password && 'Password must contain at least 6 symbols'}
           />
         </div>
@@ -152,7 +160,9 @@ export const App: React.FC = () => {
         <div className='register__block'>
           <Select
             reset={() => {
-              setState({ ...state, country: '' })
+              if (state.country) {
+                setState({ ...state, country: '' })
+              }
               checkField('country', true)
             }}
             options={countries}
