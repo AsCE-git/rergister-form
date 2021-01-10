@@ -38,14 +38,14 @@ export const CheckboxHidden = styled.input`
 `
 
 export const CheckboxBorder = styled.div`
-  border: 1px solid #0094FF;
+  border: 1px solid ${props => props.theme.checkbox.borderColor};
   margin: 0 8px 0 0;
   display: block;
   width: 14px;
   height: 14px;
   border-radius: 3px;
   & svg {
-    stroke: #0094FF
+    stroke: ${props => props.theme.checkbox.strokeColor};
   }
 `
 
@@ -56,8 +56,8 @@ export const CheckboxEl = styled.label`
 `
 
 export const CheckboxText = styled.p`
-  color: #222222;
-  font-size: 14px;
+  color: ${props => props.theme.checkbox.color};
+  font-size: ${props => props.theme.checkbox.fontSize};
 `
 // ----------------------------------------
 
@@ -67,8 +67,8 @@ export const ErrorText = styled.p`
   margin: 0;
   position: absolute;
   bottom: -15px;
-  color: #E82828;
-  font-size: 10px;
+  color: ${props => props.theme.errorComponent.color};
+  font-size: ${props => props.theme.errorComponent.fontSize};
   padding: 0 0 0 18px;
 `
 
@@ -77,8 +77,8 @@ export const ErrorText = styled.p`
 // header component
 
 export const H1 = styled('h1')<{isCenter: boolean}>`
-  font-size: 28px;
-  color: #222222;
+  font-size: ${props => props.theme.header.fontSize};
+  color: ${props => props.theme.header.color};
   line-height: 34px;
 
   ${(props) => props.isCenter && css`
@@ -97,14 +97,14 @@ export const InputContainer = styled.div`
 `
 
 export const InputEl = styled('input')<{icon: boolean}>`
-  font-size: 14px;
+  font-size: ${props => props.theme.input.fontSize};
   width: 100%;
-  color: #222222;
-  background: #F5F8FA;
-  height: 50px;
+  color: ${props => props.theme.input.color};
+  background: ${props => props.theme.input.backgroundColor};
+  height: ${props => props.theme.input.height};
   padding: 0 18px;
   &::placeholder {
-    color: #A2A2A2;
+    color: ${props => props.theme.input.placeholderColor};
   }
   ${props => props.icon && css`
     padding: 0 18px 0 52px;
@@ -133,7 +133,7 @@ export const RadioButtonHidden = styled.input`
 
 export const RadioEllipse = styled.div`
   border-radius: 50%;
-  border: 1px solid #0094FF;
+  border: 1px solid ${props => props.theme.radioButton.borderColor};
   width: 14px;
   height: 14px;
   padding: 2px;
@@ -142,7 +142,7 @@ export const RadioEllipse = styled.div`
   
 export const RadioEllipseChecked = styled.div`
   border-radius: 50%;
-  background: #0094FF;
+  background: ${props => props.theme.radioButton.backgroundColor};
   width: 100%;
   height: 100%;
 `
@@ -150,7 +150,7 @@ export const RadioEllipseChecked = styled.div`
 export const RadioLabel = styled.label`
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: ${props => props.theme.radioButton.fontSize};
   margin: 0 25px 0 0;
   cursor: pointer;
 `
@@ -170,20 +170,20 @@ export const SelectButton = styled('div')<{ isPlaceholder: boolean }>`
   justify-content: space-between;
   font-size: 14px;
   width: 100%;
-  color: #222222;
-  background: #F5F8FA;
-  height: 50px;
+  color: ${props => props.theme.select.color};
+  background: ${props => props.theme.select.backgroundColor};
+  height: ${props => props.theme.select.height};
   padding: 0 18px;
   cursor: pointer;
 
   ${(props) => props.isPlaceholder && css`
-    color: #A2A2A2
+    color: ${props => props.theme.select.placeholderColor};
   `}
 `
 
 export const SelectModal = styled.div`
   width: 100%;
-  background: #FFFFFF;
+  background: ${props => props.theme.select.backgroundModalColor};
   position: absolute;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -196,13 +196,13 @@ export const SelectOption = styled.div`
   align-items: center;
   cursor: pointer;
   padding: 0 19px;
-  height: 36px;
-  color: #222222;
-  font-size: 14px;
+  height: ${props => props.theme.select.heightOption};
+  color: ${props => props.theme.select.color};
+  font-size: ${props => props.theme.select.fontSize};
   transition: background 0.2s;
   background: transparent;
   &:hover {
-    background: #F5F8FA;
+    background: ${props => props.theme.select.backgroundHover};
   }
 `
 export const ArrowContainer = styled('div')<{ active: boolean }>`

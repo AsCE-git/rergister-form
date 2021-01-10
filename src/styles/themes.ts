@@ -39,6 +39,7 @@ export interface ITheme {
   select: {
     color: string;
     backgroundColor: string;
+    backgroundModalColor: string;
     height: string;
     placeholderColor: string;
     backgroundHover: string;
@@ -105,6 +106,7 @@ export const getTheme = (theme: typeof defaultColors): ITheme => {
     select: {
       color: theme.black,
       backgroundColor: theme.grey,
+      backgroundModalColor: theme.white,
       height: theme.heightField,
       placeholderColor: theme.lightGrey,
       backgroundHover: theme.grey,

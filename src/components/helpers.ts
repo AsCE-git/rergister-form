@@ -1,5 +1,7 @@
 import isValidEmail from 'isemail'
 
+export const countries = ['Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya']
+
 const regLatinLetters = /[^a-z ]/i
 
 export const testLatinLetters = (value: string): boolean => {

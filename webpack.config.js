@@ -59,6 +59,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.svg'], 
     alias: {
       '@': path.resolve(__dirname, 'src/components/'),
+      '@api': path.resolve(__dirname, 'src/api/'),
       '@storybook': path.resolve(__dirname, 'src/components/storybook/index'),
       '@images': path.resolve(__dirname, 'src/images/')
     }

@@ -15,6 +15,9 @@
       ],
       "@storybook": [
         "components/storybook/index"
+      ],
+      "@api/*": [
+        "api/*"
       ]
     },
     "typeRoots": [
